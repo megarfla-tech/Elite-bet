@@ -6,269 +6,269 @@ object PreseededMatchesData {
     val sampleMatches = listOf(
         AnalyzedMatch(
             id = 1,
-            homeTeam = "Manchester City",
-            awayTeam = "Arsenal",
-            league = "Premier League",
-            matchDate = "21/06/2026",
-            homeOdd = 1.95,
-            drawOdd = 3.60,
-            awayOdd = 3.80,
+            homeTeam = "Escócia",
+            awayTeam = "Marrocos",
+            league = "Copa do Mundo FIFA 2026 - Grupo C",
+            matchDate = "17/06/2026",
+            homeOdd = 2.70,
+            drawOdd = 3.10,
+            awayOdd = 2.80,
             isSample = true,
             rawAnalysisJson = """
             {
-              "confidenceScore": 92,
+              "confidenceScore": 86,
               "recommendedSingleBet": {
-                "market": "Dupla Chance: Manchester City ou Empate / Over 1.5 Gols",
-                "odd": 1.55,
-                "probability": 84.0,
-                "ev": 13.0,
-                "confidence": "Elite",
-                "justification": "City mantém invencibilidade de 24 jogos no Etihad Stadium com média de 2.2 gols por partida, enquanto o Arsenal demonstra queda física em viagens sucessivas."
+                "market": "Dupla Chance: Empate ou Marrocos (X2)",
+                "odd": 1.48,
+                "probability": 76.0,
+                "ev": 11.5,
+                "confidence": "Excelente",
+                "justification": "Marrocos mantém a espinha dorsal semifinalista do Catar (Hakimi, Amrabat) combinada com a lapidação de Brahim Díaz. A Escócia tem um plano tático pragmático, mas defensivamente oscila sob forte pressão de transição."
               },
               "layer1": {
-                "homeRecentRecentG": ["V - Aston Villa (3-1)", "V - Real Madrid (2-1)", "E - Chelsea (2-2)", "V - West Ham (4-0)", "V - Bournemouth (3-0)"],
-                "awayRecentRecentG": ["E - Arsenal (1-1)", "V - Tottenham (1-0)", "D - Bayern (0-1)", "E - Everton (0-0)", "V - Wolves (2-0)"],
-                "homeXG": 2.25,
-                "awayXG": 1.65,
-                "homeXGA": 0.95,
-                "awayXGA": 1.15,
-                "trend": "Tendência de forte volume ofensivo do mandante inicial e bloco defensivo médio-baixo do Arsenal nos primeiros 30 minutos.",
-                "completions": "16/7 - City, 11/4 - Arsenal",
-                "cornersAndCards": "Cantos: ~10.5 / Cartões: Média de 3.2 cartões no jogo"
+                "homeRecentRecentG": ["E - Finlândia (2-2)", "V - Gibraltar (2-0)", "D - Holanda (0-4)", "D - Irlanda do Norte (0-1)", "D - Noruega (3-3)"],
+                "awayRecentRecentG": ["V - Angola (1-0)", "E - Mauritânia (0-0)", "V - Tanzânia (2-0)", "D - África do Sul (0-2)", "E - RD Congo (1-1)"],
+                "homeXG": 1.28,
+                "awayXG": 1.74,
+                "homeXGA": 1.45,
+                "awayXGA": 0.92,
+                "trend": "Marrocos impõe grande volume dinâmico com ultrapassagens de Hakimi. A Escócia joga em bloco mudo com saídas longas para McTominay penetrar.",
+                "completions": "10/3 - Escócia, 14/5 - Marrocos",
+                "cornersAndCards": "Cantos aproximados: 9.0 / Cartões estimados no jogo: 4"
               },
               "layer2": {
                 "classification": "🟢 Valor Positivo",
-                "odDecline": "Odd do City caiu de 2.05 para 1.95 nas últimas 48 horas devido a confirmação do retorno de Kevin de Bruyne.",
-                "inflatedOdds": "Odd do empate (3.60) está levemente inflada considerando o histórico equilibrado entre Guardiola e Arteta.",
-                "biasFavoritism": "O mercado sobrestima a capacidade defensiva recente do Arsenal fora de casa sob pressão total."
+                "odDecline": "Odd do Marrocos caiu de 2.95 para 2.80 após a divulgação do boletim médico que confirmou força máxima tática.",
+                "inflatedOdds": "A cotação de Empate ou Marrocos a 1.48 carrega margem esticada pelas casas, que previam equilíbrio excessivo em MetLife.",
+                "biasFavoritism": "O mercado europeu sobrestima a força física escocesa ignorando o repertório de drible marroquino nos flancos."
               },
               "layer3": {
-                "probWinHome": 51.0,
-                "probDraw": 28.0,
-                "probWinAway": 21.0,
-                "probOver05": 97.0,
-                "probOver15": 85.0,
-                "probOver25": 61.0,
-                "probOver35": 38.0,
-                "probBTTS": 58.0,
-                "estCorners": "11 escanteios estimados (6 City, 5 Arsenal)",
-                "estCards": "4 cartões estimados (2 para cada time)"
+                "probWinHome": 31.0,
+                "probDraw": 29.0,
+                "probWinAway": 40.0,
+                "probOver05": 92.0,
+                "probOver15": 74.0,
+                "probOver25": 46.0,
+                "probOver35": 22.0,
+                "probBTTS": 51.0,
+                "estCorners": "8.8 escanteios estimados (4.1 Escócia, 4.7 Marrocos)",
+                "estCards": "3.8 cartões (2.0 Escócia, 1.8 Marrocos)"
               },
               "layer4": {
-                "riskIndex": 35,
-                "injuries": "City: Rodri (Dúvida leve). Arsenal: Odegaard (Fora por estiramento muscular).",
-                "rosterRotation": "City deve usar força máxima; Arsenal vem de sequência cansativa de Champions no meio da semana.",
-                "environmentalFactors": "Clima nublado com relva rápida (17°C). Sem vento relevante. Pressão total do Etihad.",
-                "pressureAndMotivation": "Briga direta pela liderança da liga. City joga para retomar o topo antes da pausa."
+                "riskIndex": 38,
+                "injuries": "Escócia: Aaron Hickey (Dúvida leve por resfriado). Marrocos: Sofyan Amrabat totalmente recuperado das dores no joelho.",
+                "rosterRotation": "Rodada de estreia do Grupo C, ambas as seleções entram com o melhor contingente de atletas fardados.",
+                "environmentalFactors": "Clima ideal em New Jersey (19°C), gramado natural de MetLife em estado espetacular de conservação.",
+                "pressureAndMotivation": "Estreia em Copa do Mundo. Quem vencer aqui encaminha matematicamente a luta pela segunda vaga ao lado do favorito Brasil."
               },
               "layer5": {
-                "realProbability": 84.0,
-                "impliedProbability": 64.5,
-                "expectedValue": 19.5,
+                "realProbability": 76.0,
+                "impliedProbability": 67.5,
+                "expectedValue": 8.5,
                 "isEvPositive": true
               },
-              "conclusaoExecutiva": "Manchester City apresenta uma estabilidade tática superior no Etihad Stadium acoplada ao desfalque do principal armador do Arsenal, Martin Odegaard. A análise quantitativa acusa uma distorção considerável nas odds de gols (Over 1.5) e dupla hipótese do mandante. A entrada sugerida City ou Empate + Over 1.5 fornece alto valor esperado (+19.5% EV) e segurança estatística excepcional de longo prazo para investidores esportivos."
+              "conclusaoExecutiva": "Este duelo na arena MetLife coloca frente a frente dois sistemas contrastantes de estilo. A Escócia apostará no contato físico e cruzamento vertical, mas a zaga marroquina de Aguerd e Saïss é dominante no jogo aéreo. No meio de campo, a qualidade técnica de Marrocos ditará o ritmo da bola. Nosso modelo quantitativo aponta que a dupla chance a favor da seleção do norte da África (Empate ou Marrocos) está subprecificada nas casas de aposta, sendo uma excelente recomendação institucional com EV+ de 8.5%."
             }
             """.trimIndent()
         ),
         AnalyzedMatch(
             id = 2,
-            homeTeam = "Real Madrid",
-            awayTeam = "Barcelona",
-            league = "La Liga",
-            matchDate = "22/06/2026",
-            homeOdd = 1.85,
-            drawOdd = 3.90,
-            awayOdd = 3.75,
+            homeTeam = "Brasil",
+            awayTeam = "Haiti",
+            league = "Copa do Mundo FIFA 2026 - Grupo C",
+            matchDate = "17/06/2026",
+            homeOdd = 1.05,
+            drawOdd = 15.00,
+            awayOdd = 26.00,
             isSample = true,
             rawAnalysisJson = """
             {
-              "confidenceScore": 88,
+              "confidenceScore": 95,
               "recommendedSingleBet": {
-                "market": "Ambas Marcam (BTTS) - Sim",
-                "odd": 1.62,
-                "probability": 78.0,
-                "ev": 12.3,
-                "confidence": "Excelente",
-                "justification": "Com os ataques em pico de eficiência (xG conjunto > 3.8) e histórico de clássicos dominados por transições rápidas, a probabilidade de ambos balançarem as redes é altíssima."
+                "market": "Brasil Handicap Asiático -2.5",
+                "odd": 1.50,
+                "probability": 73.0,
+                "ev": 6.3,
+                "confidence": "Elite",
+                "justification": "O fosso técnico e físico entre as equipes em Miami é gigantesco. Brasil com todo o poder de fogo de Vinicius, Rodrygo e Endrick diante de uma das defesas menos consolidadas das Américas."
               },
               "layer1": {
-                "homeRecentRecentG": ["V - Mallorca (2-0)", "E - Man City (1-1)", "V - Bilbao (3-0)", "V - Cadiz (1-0)", "V - Leipzig (2-1)"],
-                "awayRecentRecentG": ["V - PSG (3-2)", "V - Valencia (4-2)", "V - Getafe (2-0)", "E - Athletic (1-1)", "V - Las Palmas (3-1)"],
-                "homeXG": 2.10,
-                "awayXG": 1.95,
-                "homeXGA": 1.10,
-                "awayXGA": 1.30,
-                "trend": "Pico de aceleração ofensiva por parte das duas equipes. Real Madrid extremamente vertical com Vinicius Jr. e Mbappe.",
-                "completions": "15/6 - Real, 14/5 - Barca",
-                "cornersAndCards": "Cantos: ~9.8 / Cartões: Clássico tenso, média superior a 5.0 cartões"
+                "homeRecentRecentG": ["V - Inglaterra (1-0)", "E - Espanha (3-3)", "V - México (3-2)", "D - EUA (1-1)", "V - Equador (2-0)"],
+                "awayRecentRecentG": ["E - Guiana Francesa (1-1)", "V - Santa Lúcia (2-1)", "V - Barbados (3-1)", "D - Porto Rico (1-2)", "E - Jamaica (0-0)"],
+                "homeXG": 2.95,
+                "awayXG": 0.85,
+                "homeXGA": 0.80,
+                "awayXGA": 1.95,
+                "trend": "Brasil domina a posse (78% de média projetada) com pressão alta imediata e infiltrações na área haitiana desde o primeiro apito.",
+                "completions": "24/11 - Brasil, 5/1 - Haiti",
+                "cornersAndCards": "Cantos: ~11.5 / Cartões estimados no jogo: 2.5 (pouco contato tático esperado)"
               },
               "layer2": {
                 "classification": "🟢 Valor Positivo",
-                "odDecline": "Odd do Real Madrid subiu ligeiramente de 1.80 para 1.85 devido a ajustes no mercado asiático.",
-                "inflatedOdds": "Odd de Ambas Marcam (1.62) está subprecificada pelo viés defensivo que o mercado costuma dar a jogos de ida.",
-                "biasFavoritism": "O favoritismo puro do Real Madrid é legítimo, mas a odd de 1.85 desvaloriza as escapadas em velocidade do Barcelona."
+                "odDecline": "Odd da vitória direta do Brasil é irrisória (1.05), porém a linha de handicap esticou com forte volume institucional em -2.5.",
+                "inflatedOdds": "As cotações de Over 3.5 gols (1.80) estão sob forte flutuação e apresentam leve distorção de valor.",
+                "biasFavoritism": "O extremo favoritismo da seleção brasileira é amparado matematicamente pelas métricas absolutas de xG tático."
               },
               "layer3": {
-                "probWinHome": 54.0,
-                "probDraw": 23.0,
-                "probWinAway": 23.0,
+                "probWinHome": 92.0,
+                "probDraw": 6.0,
+                "probWinAway": 2.0,
                 "probOver05": 99.0,
-                "probOver15": 88.0,
-                "probOver25": 68.0,
-                "probOver35": 42.0,
-                "probBTTS": 78.0,
-                "estCorners": "9.5 escanteios estimados",
-                "estCards": "5.5 cartões estimados no total"
+                "probOver15": 94.0,
+                "probOver25": 81.0,
+                "probOver35": 62.0,
+                "probBTTS": 38.0,
+                "estCorners": "11.0 cantos projetados (9 Brasil, 2 Haiti)",
+                "estCards": "2.8 cartões estimados (0.8 Brasil, 2.0 Haiti)"
               },
               "layer4": {
-                "riskIndex": 42,
-                "injuries": "Real Madrid: Courtois (Dúvida no gol). Barcelona: Gavi (Transição física).",
-                "rosterRotation": "Nenhuma das equipes deve rodar peças cruciais. El Clásico dita os rumos da liga.",
-                "environmentalFactors": "Sem previsão de chuva no Bernabéu. Teto retrátil pode estar fechado (22°C estável).",
-                "pressureAndMotivation": "Pressão máxima. Quem vencer assume a liderança moral e matemática de La Liga."
+                "riskIndex": 20,
+                "injuries": "Brasil: Gabriel Magalhães poupado preventivamente de início. Haiti: Completo para o jogo histórico do país.",
+                "rosterRotation": "Brasil vai com força total para resolver a estreia de Copa do Mundo precoce e dar confiança à torcida.",
+                "environmentalFactors": "Miami (Hard Rock Stadium) com alta umidade relativa do ar (82%), calor forte de 28°C no apito inicial.",
+                "pressureAndMotivation": "Motivação brasileira máxima sob a reestreia do sonho da sexta estrela. Haiti joga com a motivação de fazer história."
               },
               "layer5": {
-                "realProbability": 78.0,
-                "impliedProbability": 61.7,
-                "expectedValue": 16.3,
+                "realProbability": 73.0,
+                "impliedProbability": 66.7,
+                "expectedValue": 6.3,
                 "isEvPositive": true
               },
-              "conclusaoExecutiva": "O clássico espanhol encontra ambas as equipes no auge de sua performance ofensiva em termos de gols esperados (xG). A defesa do Barcelona, embora resiliente nas estatísticas domésticas, sofre em transições rápidas - especialidade do Real Madrid. Da mesma forma, Mbappe e Vinicius devem agredir a linha alta catalã, mas Lewandowski está em momento excelente. Projetamos um clássico aberto e propício ao Ambas Marcam, com um valor esperado positivo (EV) e segurança média para apostadores institucionais."
+              "conclusaoExecutiva": "Este confronto representará um ataque de ondas constantes do Brasil. Em Miami, sob as arquibancadas repletas de brasileiros, a equipe canarinho buscará uma vitória contundente na estreia para estabelecer seu prestígio. O Haiti tentará formar um bloco defensivo hiper compactado de cinco defensores, mas a velocidade e o drible curto dos extremos de Dorival Júnior quebrarão as linhas rapidamente. O handicap asiático de -2.5 a favor do Brasil entrega valor matemático seguro para investimento de médio risco."
             }
             """.trimIndent()
         ),
         AnalyzedMatch(
             id = 3,
-            homeTeam = "Palmeiras",
-            awayTeam = "Flamengo",
-            league = "Brasileirão",
-            matchDate = "23/06/2026",
-            homeOdd = 2.40,
-            drawOdd = 3.20,
-            awayOdd = 3.00,
+            homeTeam = "Argentina",
+            awayTeam = "Suécia",
+            league = "Copa do Mundo FIFA 2026 - Grupo H",
+            matchDate = "18/06/2026",
+            homeOdd = 1.45,
+            drawOdd = 4.20,
+            awayOdd = 7.50,
             isSample = true,
             rawAnalysisJson = """
             {
-              "confidenceScore": 82,
+              "confidenceScore": 89,
               "recommendedSingleBet": {
-                "market": "Under 2.5 Gols",
-                "odd": 1.75,
-                "probability": 65.0,
-                "ev": 13.7,
+                "market": "Vitória da Argentina",
+                "odd": 1.45,
+                "probability": 73.0,
+                "ev": 4.0,
                 "confidence": "Excelente",
-                "justification": "Duelo tático de extrema rigidez defensiva entre Abel Ferreira e o técnico adversário. Historicamente, confrontos diretos eliminatórios ou de topo de tabela no Allianz são pautados por forte marcação."
+                "justification": "A Argentina detém superioridade criativa indiscutível com a liderança de Lionel Messi, além de solidez com Mac Allister e Enzo Fernández. A Suécia é disciplinada, mas carece de velocidade para parar as infiltrações rápidas no meio."
               },
               "layer1": {
-                "homeRecentRecentG": ["V - Coritiba (1-0)", "E - São Paulo (0-0)", "V - San Lorenzo (2-0)", "D - Botafogo (0-1)", "V - Bahia (2-1)"],
-                "awayRecentRecentG": ["V - Botafogo (2-1)", "E - Fluminense (1-1)", "V - Peñarol (1-0)", "V - Grêmio (3-0)", "D - Cruzeiro (1-2)"],
-                "homeXG": 1.35,
-                "awayXG": 1.45,
-                "homeXGA": 0.85,
-                "awayXGA": 1.05,
-                "trend": "Fase de forte consolidação defensiva do Palmeiras jogando com linha de 3 zagueiros sob comando de Abel nos jogos grandes.",
-                "completions": "10/3 - Palmeiras, 11/4 - Flamengo",
-                "cornersAndCards": "Cantos: ~11.2 / Cartões: Alta probabilidade de cartões amarelados (méd. 6.2)"
+                "homeRecentRecentG": ["V - Equador (1-0)", "V - Guatemala (4-1)", "V - Canadá (2-0)", "V - Chile (1-0)", "V - Peru (2-0)"],
+                "awayRecentRecentG": ["V - Albânia (1-0)", "D - Dinamarca (1-2)", "D - Portugal (2-5)", "E - Estônia (1-1)", "V - Moldávia (3-0)"],
+                "homeXG": 2.10,
+                "awayXG": 1.25,
+                "homeXGA": 0.70,
+                "awayXGA": 1.40,
+                "trend": "Argentina opera em paciência absoluta, rodando passes no terço final até encontrar Messi ou os avanços rápidos de Lautaro/Álvarez.",
+                "completions": "15/6 - Argentina, 9/3 - Suécia",
+                "cornersAndCards": "Média de 9.5 escanteios / 4.5 cartões projetados no jogo"
               },
               "layer2": {
                 "classification": "🟢 Valor Positivo",
-                "odDecline": "Odd do Palmeiras subiu de 2.25 para 2.40 refletindo o favoritismo diluído e respeito ao elenco rubro-negro.",
-                "inflatedOdds": "A odd do Under 2.5 (1.75) oferece um valor excelente, pois a projeção inicial calculava a probabilidade real em torno de 1.62.",
-                "biasFavoritism": "O mercado assume que o poder de fogo de ambos os ataques exigirá um festival de gols, ignorando o retrospecto ultra-defensivo nos últimos 4 duelos diretos."
+                "odDecline": "A odd da Argentina caiu ligeiramente de 1.50 para 1.45 após confirmação do treino tático limpo da Albiceleste.",
+                "inflatedOdds": "A odd do mercado de Resultado Final para a Argentina está ajustada de forma muito realista, nos limites da margem segura de EV.",
+                "biasFavoritism": "Existe respeito ao pragmatismo sueco pelo histórico físico, gerando cotações atrativas para a vitória sul-americana direta."
               },
               "layer3": {
-                "probWinHome": 40.0,
-                "probDraw": 31.0,
-                "probWinAway": 29.0,
-                "probOver05": 90.0,
-                "probOver15": 70.0,
-                "probOver25": 41.0,
-                "probOver35": 20.0,
+                "probWinHome": 69.0,
+                "probDraw": 21.0,
+                "probWinAway": 10.0,
+                "probOver05": 94.0,
+                "probOver15": 78.0,
+                "probOver25": 49.0,
+                "probOver35": 23.0,
                 "probBTTS": 48.0,
-                "estCorners": "11 escanteios",
-                "estCards": "6 cartões amarelos estimados"
+                "estCorners": "9.2 cantos estimados totais (6.0 Argentina, 3.2 Suécia)",
+                "estCards": "4.0 cartões estimados (1.5 Argentina, 2.5 Suécia)"
               },
               "layer4": {
-                "riskIndex": 50,
-                "injuries": "Palmeiras: Gomez (Suspenso). Flamengo: Arrascaeta (Retornando de lesão grave, inicia no banco).",
-                "rosterRotation": "Palmeiras com força máxima disponível, exceto zaga. Flamengo deve rodar os laterais devido ao desgaste de viagem.",
-                "environmentalFactors": "Allianz Parque (Grama sintética rápida). Sem chuva, temperatura amena (20°C). Estádio lotado.",
-                "pressureAndMotivation": "Encontro clássico que pode desenhar o campeão do primeiro turno. Rivalidade histórica acirrada."
+                "riskIndex": 30,
+                "injuries": "Argentina: Sem problemas médicos no elenco titular. Suécia: Isak confirmado de volta mas sem ritmo físico de 90 minutos.",
+                "rosterRotation": "Nenhum desgaste nos elencos na estreia do Grupo H. Ambas entrarão com força máxima absoluta.",
+                "environmentalFactors": "Estádio Mercedes-Benz em Atlanta, com temperatura de 22°C (ar condicionado ativo sob teto fechado). Gramado excelente.",
+                "pressureAndMotivation": "Argentina inicia a defesa de seu título mundial de 2022 com a pressão da torcida local, que lotará o estádio."
               },
               "layer5": {
-                "realProbability": 65.0,
-                "impliedProbability": 57.1,
-                "expectedValue": 13.8,
+                "realProbability": 73.0,
+                "impliedProbability": 69.0,
+                "expectedValue": 4.0,
                 "isEvPositive": true
               },
-              "conclusaoExecutiva": "Palmeiras e Flamengo possuem dois dos plantéis mais qualificados das Américas, mas os confrontos diretos mostram um controle pragmático agressivo. Abel Ferreira deve congestionar o meio de campo neutralizando a transição do Flamengo. Do outro lado, o Flamengo tem bloco defensivo sob liderança experiente. O valor puro está no mercado de contenção de gols (Under 2.5), onde as casas pagam 1.75 para uma probabilidade real avaliada por nós em 65% (odd de valor real 1.54)."
+              "conclusaoExecutiva": "Sob a maestria de Scaloni e o brilho eterno de Messi, a Argentina é dominante nos indicadores de dinâmica de campo com 2.10 de xG ofensivo médio. A Suécia, sob os moldes táticos europeus clássicos de bloco rígido, tentará conter a progressão argentina pela lateral, mas cederá espaços para os chutes de média distância de Mac Allister. A odd direta de 1.45 para a vitória albiceleste é sustentável e fornece um porto seguro de rentabilidade de portfólio."
             }
             """.trimIndent()
         ),
         AnalyzedMatch(
             id = 4,
-            homeTeam = "Inter Milan",
-            awayTeam = "AC Milan",
-            league = "Serie A",
-            matchDate = "24/06/2026",
-            homeOdd = 2.00,
-            drawOdd = 3.40,
-            awayOdd = 3.60,
+            homeTeam = "Inglaterra",
+            awayTeam = "Camarões",
+            league = "Copa do Mundo FIFA 2026 - Grupo D",
+            matchDate = "19/06/2026",
+            homeOdd = 1.30,
+            drawOdd = 5.20,
+            awayOdd = 11.00,
             isSample = true,
             rawAnalysisJson = """
             {
-              "confidenceScore": 79,
+              "confidenceScore": 84,
               "recommendedSingleBet": {
-                "market": "Empate ou Vitória do Inter Milão + Over 1.5 Gols",
-                "odd": 1.60,
-                "probability": 74.0,
-                "ev": 18.4,
-                "confidence": "Boa",
-                "justification": "O Inter venceu os últimos 5 Derby della Madonnina em todas as competições e demonstra uma superioridade coletiva consolidada sobre o rival Milan."
+                "market": "Inglaterra vence e Over 1.5 Gols",
+                "odd": 1.52,
+                "probability": 75.0,
+                "ev": 9.2,
+                "confidence": "Excelente",
+                "justification": "A Inglaterra chega com uma das maiores frotas ofensivas (Kane, Bellingham, Saka) com xG médio de 2.25. Camarões tem força física, mas sua zaga cede espaço em bolas aéreas e velocidade."
               },
               "layer1": {
-                "homeRecentRecentG": ["V - Lazio (2-0)", "V - Napoli (3-1)", "E - Juventus (1-1)", "V - Genoa (2-0)", "V - Fiorentina (1-0)"],
-                "awayRecentRecentG": ["E - Roma (2-2)", "D - Atalanta (1-2)", "V - Lecce (3-1)", "V - Torino (2-1)", "E - Bologna (1-1)"],
-                "homeXG": 1.90,
-                "awayXG": 1.50,
-                "homeXGA": 0.80,
-                "awayXGA": 1.40,
-                "trend": "Inter mantém altíssimo rigor defensivo e letalidade no ataque rápido operado pela dupla Lautaro-Thuram.",
-                "completions": "13/5 - Inter, 12/4 - Milan",
-                "cornersAndCards": "Cantos: ~10.0 / Cartões: Derby de forte contato, cartões frequentes"
+                "homeRecentRecentG": ["V - Bósnia (3-0)", "D - Islândia (0-1)", "V - Sérvia (1-0)", "E - Dinamarca (1-1)", "E - Eslovênia (0-0)"],
+                "awayRecentRecentG": ["E - Guiné (1-1)", "D - Senegal (1-3)", "V - Gâmbia (3-2)", "D - Nigéria (0-2)", "V - Cabo Verde (4-1)"],
+                "homeXG": 2.25,
+                "awayXG": 1.15,
+                "homeXGA": 0.85,
+                "awayXGA": 1.45,
+                "trend": "Inglaterra mantém posse intensa em ritmo pausado, buscando cruzamentos para Harry Kane ou desdobramentos de Jude Bellingham na área.",
+                "completions": "16/5 - Inglaterra, 8/2 - Camarões",
+                "cornersAndCards": "Cantos médios projetados: 10.0 / Cartões projetados no jogo: 3.5"
               },
               "layer2": {
                 "classification": "🟢 Valor Positivo",
-                "odDecline": "Odd do Inter Milão diminuiu sutilmente devido ao volume massivo de apostas domésticas a favor dos nerazzurri.",
-                "inflatedOdds": "A odd para vitória direta do Inter (2.00) está ligeiramente subprecificada, estimamos o valor correto em 1.85.",
-                "biasFavoritism": "O Milan é tradicional, mas a transição tática do time atual gera espaços severos no corredor central que o Inter explora perfeitamente."
+                "odDecline": "A odd da Inglaterra caiu ligeiramente nas últimas 12 horas, atraindo forte volume de apostas agrupadas europeias.",
+                "inflatedOdds": "A linha de vitória integrada a gols (Inglaterra para vencer + Over 1.5) recebeu impulso para 1.52, superando nossa projeção de 1.40.",
+                "biasFavoritism": "O mercado ignora o retrospecto recente competitivo das equipes africanas em estreias carregando odds esticadas de valor."
               },
               "layer3": {
-                "probWinHome": 54.0,
-                "probDraw": 26.0,
-                "probWinAway": 20.0,
+                "probWinHome": 75.0,
+                "probDraw": 16.0,
+                "probWinAway": 9.0,
                 "probOver05": 96.0,
                 "probOver15": 81.0,
-                "probOver25": 54.0,
-                "probOver35": 30.0,
-                "probBTTS": 55.0,
-                "estCorners": "10escanteios médios",
-                "estCards": "5 cartões médios"
+                "probOver25": 52.0,
+                "probOver35": 28.0,
+                "probBTTS": 49.0,
+                "estCorners": "9.5 escanteios estimados (6.0 Inglaterra, 3.5 Camarões)",
+                "estCards": "3.2 cartões estimados no total (1.2 Inglaterra, 2.0 Camarões)"
               },
               "layer4": {
-                "riskIndex": 46,
-                "injuries": "Inter: Acerbi (Dúvida leve). Milan: Maignan (Fora por problemas nas costas).",
-                "rosterRotation": "Nenhum técnico vai abdicar de titulares. Duelo chave de San Siro.",
-                "environmentalFactors": "Clima fresco em Milão, relva em excelente estado (15°C).",
-                "pressureAndMotivation": "Derby de altíssima tensão emocional. Briga direta pelo topo da tabela e hegemonia da cidade."
+                "riskIndex": 35,
+                "injuries": "Inglaterra: Bukayo Saka recuperado do cansaço tático muscular. Camarões: Rigobert Song com elenco integral.",
+                "rosterRotation": "Força máxima tática, se tratando da estreia do Grupo D na ensolarada Los Angeles.",
+                "environmentalFactors": "SoFi Stadium em Los Angeles. Temperatura interna controlada refrescante (21°C). Sem vento. Campo impecável.",
+                "pressureAndMotivation": "Inglaterra entra com o peso da expectativa histórica por glória internacional. Camarões joga como desafiante audaz."
               },
               "layer5": {
-                "realProbability": 74.0,
-                "impliedProbability": 62.5,
-                "expectedValue": 18.4,
+                "realProbability": 75.0,
+                "impliedProbability": 65.8,
+                "expectedValue": 9.2,
                 "isEvPositive": true
               },
-              "conclusaoExecutiva": "O Derby della Madonnina de amanhã apresenta claro favoritismo coletivo e tático para a Inter de Inzaghi. A ausência de Mike Maignan no gol do Milan desestabiliza consideravelmente a segurança defensiva do time, que já exibe tendências preocupantes de conceder contra-ataques rápidos. Lautaro Martinez e Thuram devem aproveitar estes espaços. A entrada de segurança com dupla chance da Inter + Over 1.5 gols é amparada por 74% de probabilidade real calculada em nosso motor, carregando um EV de +18.4%."
+              "conclusaoExecutiva": "Duelo físico de alto nível no SoFi Stadium. A Inglaterra possui talentos táticos incomparáveis no último terço de campo com Kane e Bellingham. Embora Camarões ofereça um bloco de marcação forte com Anguissa no meio, a velocidade na transição rápida de Saka e Foden criará problemas pelas beiradas. O mercado combinado Inglaterra sela o vitorioso e Over 1.5 gols no jogo oferece uma margem matemática excelente (EV+ de 9.2%), adequada para apostas táticas."
             }
             """.trimIndent()
         )
