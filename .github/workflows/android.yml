@@ -23,8 +23,23 @@ jobs:
       - name: Create .env file
         run: cp .env.example .env
 
-      - name: Decode Debug Keystore
-        run: tr -d '\r\n' < debug.keystore.base64 | base64 --decode > debug.keystore
+      - name: Setup Debug Keystore (with Fallback)
+        run: |
+          # 1. Decode cleanly with Python to prevent any line-ending/CRLF corruption under Git checkout
+          if [ -f debug.keystore.base64 ]; then
+            echo "Decoding debug.keystore.base64..."
+            python3 -c "import base64; data = open('debug.keystore.base64', 'rb').read().replace(b'\r', b'').replace(b'\n', b''); decoded = base64.b64decode(data); open('debug.keystore', 'wb').write(decoded)"
+          fi
+          
+          # 2. Verify keystore integrity, if corrupt or password mismatch, generate a pristine standard debug keystore
+          if [ -f debug.keystore ] && keytool -list -keystore debug.keystore -storepass android > /dev/null 2>&1; then
+            echo "✅ Decoded debug.keystore successfully verified!"
+          else
+            echo "⚠️ Decoded debug.keystore was corrupt, unreadable, or missing. Generating a fresh standard debug.keystore..."
+            rm -f debug.keystore
+            keytool -genkey -v -keystore debug.keystore -storepass android -alias androiddebugkey -keypass android -keyalg RSA -keysize 2048 -validity 10000 -dname "CN=Android Debug,O=Android,C=US"
+            echo "✅ Fresh debug.keystore generated successfully!"
+          fi
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
