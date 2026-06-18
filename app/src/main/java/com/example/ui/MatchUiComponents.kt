@@ -1,6 +1,7 @@
 package com.example.ui
 
 import androidx.compose.animation.*
+import androidx.compose.animation.core.*
 import androidx.compose.foundation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -15,6 +16,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.PathEffect
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -1121,5 +1123,402 @@ fun AccumulatorCard(acc: AccumulatorRecommendation) {
                 }
             }
         }
+    }
+}
+
+@Composable
+fun ProbabilityDashboardRecharts(
+    homeTeam: String,
+    awayTeam: String,
+    homeOdd: Double,
+    drawOdd: Double,
+    awayOdd: Double,
+    probHome: Double,
+    probDraw: Double,
+    probAway: Double,
+    modifier: Modifier = Modifier
+) {
+    val totalImplied = (1.0 / homeOdd) + (1.0 / drawOdd) + (1.0 / awayOdd)
+    val impliedHome = if (totalImplied > 0) ((1.0 / homeOdd) / totalImplied) * 100.0 else 33.3
+    val impliedDraw = if (totalImplied > 0) ((1.0 / drawOdd) / totalImplied) * 100.0 else 33.3
+    val impliedAway = if (totalImplied > 0) ((1.0 / awayOdd) / totalImplied) * 100.0 else 33.3
+
+    var selectedIndex by remember { mutableStateOf<Int?>(null) }
+    var animateChart by remember { mutableStateOf(false) }
+
+    LaunchedEffect(Unit) {
+        animateChart = true
+    }
+
+    val scaleHomeGemini by animateFloatAsState(
+        targetValue = if (animateChart) (probHome / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+    val scaleHomeMarket by animateFloatAsState(
+        targetValue = if (animateChart) (impliedHome / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
+    val scaleDrawGemini by animateFloatAsState(
+        targetValue = if (animateChart) (probDraw / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+    val scaleDrawMarket by animateFloatAsState(
+        targetValue = if (animateChart) (impliedDraw / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
+    val scaleAwayGemini by animateFloatAsState(
+        targetValue = if (animateChart) (probAway / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+    val scaleAwayMarket by animateFloatAsState(
+        targetValue = if (animateChart) (impliedAway / 100.0).toFloat().coerceIn(0.01f, 1f) else 0.01f,
+        animationSpec = tween(durationMillis = 1000)
+    )
+
+    Card(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(vertical = 8.dp)
+            .testTag("probability_dashboard_card"),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = CardGray),
+        border = BorderStroke(1.dp, Color(0xFF1E293B))
+    ) {
+        Column(modifier = Modifier.padding(16.dp)) {
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Icon(
+                        imageVector = Icons.Default.QueryStats,
+                        contentDescription = null,
+                        tint = SportGreen,
+                        modifier = Modifier.size(20.dp)
+                    )
+                    Spacer(modifier = Modifier.width(8.dp))
+                    Column {
+                        Text(
+                            text = "DASHBOARD DE PROBABILIDADES 1X2",
+                            color = Color.White,
+                            fontSize = 12.sp,
+                            fontWeight = FontWeight.Bold,
+                            letterSpacing = 0.5.sp
+                        )
+                        Text(
+                            text = "Análise quantitativa real-time via API Gemini",
+                            color = SecondaryText,
+                            fontSize = 10.sp
+                        )
+                    }
+                }
+
+                Box(
+                    modifier = Modifier
+                        .clip(RoundedCornerShape(6.dp))
+                        .background(CyberTeal.copy(alpha = 0.1f))
+                        .padding(horizontal = 8.dp, vertical = 4.dp)
+                ) {
+                    Text(
+                        text = "RECHARTS ENGINE",
+                        color = CyberTeal,
+                        fontSize = 9.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(20.dp))
+
+            Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .height(180.dp)
+            ) {
+                Canvas(modifier = Modifier.fillMaxSize()) {
+                    val heights = listOf(0f, 0.25f, 0.5f, 0.75f, 1.0f)
+                    heights.forEach { fraction ->
+                        val y = size.height * fraction
+                        drawLine(
+                            color = Color(0xFF334155).copy(alpha = 0.4f),
+                            start = androidx.compose.ui.geometry.Offset(0f, y),
+                            end = androidx.compose.ui.geometry.Offset(size.width, y),
+                            strokeWidth = 1f,
+                            pathEffect = PathEffect.dashPathEffect(floatArrayOf(10f, 10f), 0f)
+                        )
+                    }
+                }
+
+                Row(
+                    modifier = Modifier.fillMaxSize(),
+                    horizontalArrangement = Arrangement.SpaceAround,
+                    verticalAlignment = Alignment.Bottom
+                ) {
+                    InteractiveBarColumn(
+                        label = "Mandante",
+                        geminiPct = probHome,
+                        marketPct = impliedHome,
+                        scaleGemini = scaleHomeGemini,
+                        scaleMarket = scaleHomeMarket,
+                        colorGemini = SportGreen,
+                        colorMarket = CyberTeal,
+                        isSelected = selectedIndex == 0,
+                        onClick = { selectedIndex = if (selectedIndex == 0) null else 0 }
+                    )
+
+                    InteractiveBarColumn(
+                        label = "Empate",
+                        geminiPct = probDraw,
+                        marketPct = impliedDraw,
+                        scaleGemini = scaleDrawGemini,
+                        scaleMarket = scaleDrawMarket,
+                        colorGemini = SecondaryText,
+                        colorMarket = CyberTeal.copy(alpha = 0.7f),
+                        isSelected = selectedIndex == 1,
+                        onClick = { selectedIndex = if (selectedIndex == 1) null else 1 }
+                    )
+
+                    InteractiveBarColumn(
+                        label = "Visitante",
+                        geminiPct = probAway,
+                        marketPct = impliedAway,
+                        scaleGemini = scaleAwayGemini,
+                        scaleMarket = scaleAwayMarket,
+                        colorGemini = WarningOrange,
+                        colorMarket = CyberTeal,
+                        isSelected = selectedIndex == 2,
+                        onClick = { selectedIndex = if (selectedIndex == 2) null else 2 }
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.CenterVertically
+            ) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.size(8.dp).clip(RoundedCornerShape(4.dp)).background(SportGreen))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = "Realidade AI", color = LightText, fontSize = 10.sp)
+                }
+                Spacer(modifier = Modifier.width(16.dp))
+                Row(verticalAlignment = Alignment.CenterVertically) {
+                    Box(modifier = Modifier.size(8.dp).clip(RoundedCornerShape(4.dp)).background(CyberTeal))
+                    Spacer(modifier = Modifier.width(4.dp))
+                    Text(text = "Mercado (Odds)", color = LightText, fontSize = 10.sp)
+                }
+            }
+
+            Spacer(modifier = Modifier.height(16.dp))
+
+            AnimatedContent(
+                targetState = selectedIndex,
+                transitionSpec = {
+                    fadeIn() togetherWith fadeOut()
+                }
+            ) { sel ->
+                if (sel != null) {
+                    val outcomeTitle = when (sel) {
+                        0 -> "VITÓRIA MANDANTE (1) - $homeTeam"
+                        1 -> "EMPATE (X)"
+                        else -> "VITÓRIA VISITANTE (2) - $awayTeam"
+                    }
+                    val geminiPct = when (sel) {
+                        0 -> probHome
+                        1 -> probDraw
+                        else -> probAway
+                    }
+                    val marketPct = when (sel) {
+                        0 -> impliedHome
+                        1 -> impliedDraw
+                        else -> impliedAway
+                    }
+                    val odd = when (sel) {
+                        0 -> homeOdd
+                        1 -> drawOdd
+                        else -> awayOdd
+                    }
+                    
+                    val valueAdvantage = geminiPct - marketPct
+                    val isEVPlus = valueAdvantage > 0
+
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFF0F172A), RoundedCornerShape(12.dp))
+                            .border(1.dp, if (isEVPlus) SportGreen.copy(alpha = 0.4f) else DarkBorder, RoundedCornerShape(12.dp))
+                            .padding(12.dp)
+                    ) {
+                        Column {
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween,
+                                verticalAlignment = Alignment.CenterVertically
+                            ) {
+                                Text(
+                                    text = outcomeTitle,
+                                    color = Color.White,
+                                    fontSize = 11.sp,
+                                    fontWeight = FontWeight.Bold
+                                )
+
+                                Surface(
+                                    color = if (isEVPlus) SportGreen.copy(alpha = 0.15f) else Color.Red.copy(alpha = 0.15f),
+                                    shape = RoundedCornerShape(4.dp)
+                                ) {
+                                    Text(
+                                        text = if (isEVPlus) "OFERTA EV+ DETECTADA" else "SEM VALOR ESPERADO",
+                                        color = if (isEVPlus) SportGreen else Color.Red,
+                                        fontSize = 8.sp,
+                                        fontWeight = FontWeight.ExtraBold,
+                                        modifier = Modifier.padding(horizontal = 6.dp, vertical = 2.dp)
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            Row(
+                                modifier = Modifier.fillMaxWidth(),
+                                horizontalArrangement = Arrangement.SpaceBetween
+                            ) {
+                                Column {
+                                    Text(text = "PROBABILIDADE REAL AI", color = SecondaryText, fontSize = 9.sp)
+                                    Text(text = "${String.format("%.1f", geminiPct)}%", color = if (sel == 0) SportGreen else if (sel == 2) WarningOrange else LightText, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                                }
+                                Column {
+                                    Text(text = "IMPLICADO MERCADO", color = SecondaryText, fontSize = 9.sp)
+                                    Text(text = "${String.format("%.1f", marketPct)}%", color = CyberTeal, fontSize = 14.sp, fontWeight = FontWeight.Bold)
+                                }
+                                Column(horizontalAlignment = Alignment.End) {
+                                    Text(text = "DISTORÇÃO REAL DO VALOR", color = SecondaryText, fontSize = 9.sp)
+                                    Text(
+                                        text = "${if (valueAdvantage >= 0) "+" else ""}${String.format("%.1f", valueAdvantage)}%",
+                                        color = if (isEVPlus) SportGreen else Color.Red,
+                                        fontSize = 14.sp,
+                                        fontWeight = FontWeight.ExtraBold
+                                    )
+                                }
+                            }
+
+                            Spacer(modifier = Modifier.height(8.dp))
+
+                            val evCalculation = (geminiPct / 100.0) * odd - 1.0
+                            val evPercentageStr = String.format("%.1f", evCalculation * 100.0)
+                            Text(
+                                text = "A modelagem quantitativa calcula uma distorção de ${if (valueAdvantage >= 0) "vantagem" else "desvantagem"} de ${String.format("%.1f", Math.abs(valueAdvantage))}% contra as casas de apostas. O Retorno Esperado Matemático (EV+) de valor esperado nesta seleção é de ${if (evCalculation >= 0) "+" else ""}$evPercentageStr%.",
+                                color = LightText,
+                                fontSize = 10.sp,
+                                lineHeight = 14.sp
+                            )
+                        }
+                    }
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .background(Color(0xFF0F172A), RoundedCornerShape(12.dp))
+                            .border(1.dp, Color(0xFF1E293B), RoundedCornerShape(12.dp))
+                            .padding(12.dp),
+                        contentAlignment = Alignment.Center
+                    ) {
+                        Row(verticalAlignment = Alignment.CenterVertically) {
+                            Icon(
+                                imageVector = Icons.Default.TouchApp,
+                                contentDescription = null,
+                                tint = SecondaryText,
+                                modifier = Modifier.size(16.dp)
+                            )
+                            Spacer(modifier = Modifier.width(8.dp))
+                            Text(
+                                text = "TOQUE NAS COLUNAS PARA EXIBIR O FOOTPRINT QUANTITATIVO (EV+).",
+                                color = SecondaryText,
+                                fontSize = 10.sp,
+                                fontWeight = FontWeight.Bold
+                            )
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+@Composable
+fun InteractiveBarColumn(
+    label: String,
+    geminiPct: Double,
+    marketPct: Double,
+    scaleGemini: Float,
+    scaleMarket: Float,
+    colorGemini: Color,
+    colorMarket: Color,
+    isSelected: Boolean,
+    onClick: () -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .width(84.dp)
+            .clickable { onClick() }
+            .padding(vertical = 4.dp),
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.Bottom
+    ) {
+        Row(
+            modifier = Modifier
+                .height(115.dp)
+                .fillMaxWidth()
+                .background(if (isSelected) Color(0xFF1E293B).copy(alpha = 0.5f) else Color.Transparent, RoundedCornerShape(6.dp))
+                .padding(horizontal = 6.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(scaleGemini)
+                    .clip(RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
+                    .background(colorGemini)
+                    .border(
+                        width = if (isSelected) 1.5.dp else 0.dp,
+                        color = Color.White,
+                        shape = RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp)
+                    )
+            )
+
+            Box(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight(scaleMarket)
+                    .clip(RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp))
+                    .background(colorMarket.copy(alpha = 0.4f))
+                    .border(
+                        width = 1.dp,
+                        color = colorMarket,
+                        shape = RoundedCornerShape(topStart = 3.dp, topEnd = 3.dp)
+                    )
+            )
+        }
+
+        Spacer(modifier = Modifier.height(4.dp))
+
+        Text(
+            text = label,
+            color = if (isSelected) Color.White else SecondaryText,
+            fontSize = 11.sp,
+            fontWeight = if (isSelected) FontWeight.Bold else FontWeight.Normal
+        )
+        Text(
+            text = "${geminiPct.toInt()}% / ${marketPct.toInt()}%",
+            color = if (isSelected) colorGemini else SecondaryText.copy(alpha = 0.7f),
+            fontSize = 10.sp,
+            fontWeight = FontWeight.Bold
+        )
     }
 }

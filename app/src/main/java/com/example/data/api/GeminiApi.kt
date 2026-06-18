@@ -1,6 +1,7 @@
 package com.example.data.api
 
 import com.example.data.model.AnalysisReport
+import com.example.data.model.MatchProbabilityAnalysis
 import com.squareup.moshi.JsonClass
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
@@ -89,4 +90,5 @@ object NetworkModule {
     }
 
     val reportAdapter = moshi.adapter(AnalysisReport::class.java)
+    val probabilityAnalysisAdapter = moshi.adapter(MatchProbabilityAnalysis::class.java)
 }

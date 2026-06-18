@@ -2,9 +2,7 @@ name: Build Android APK
 
 on:
   push:
-    branches: [ "main", "master" ]
   pull_request:
-    branches: [ "main", "master" ]
   workflow_dispatch:
 
 jobs:
@@ -26,18 +24,19 @@ jobs:
         run: cp .env.example .env
 
       - name: Decode Debug Keystore
-        run: base64 --decode debug.keystore.base64 > debug.keystore
+        run: tr -d '\r\n' < debug.keystore.base64 | base64 --decode > debug.keystore
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-        with:
-          gradle-version: '9.3.1'
+
+      - name: Grant Execute Permission to Gradlew
+        run: chmod +x gradlew
 
       - name: Build Debug APK
-        run: gradle :app:assembleDebug -x test --no-daemon
+        run: ./gradlew :app:assembleDebug -x test --no-daemon
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
           name: PronoElite-Debug-APK
-          path: app/build/outputs/apk/debug/app-debug.apk
+          path: app/build/outputs/apk/debug/*.apk

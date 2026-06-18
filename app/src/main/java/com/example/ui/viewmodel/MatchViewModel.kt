@@ -8,6 +8,7 @@ import com.example.data.local.AnalyzedMatch
 import com.example.data.repository.MatchRepository
 import com.example.data.api.NetworkModule
 import com.example.data.model.AnalysisReport
+import com.example.data.model.MatchProbabilityAnalysis
 import com.example.data.model.RecommendedSingleBet
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -19,6 +20,13 @@ sealed interface AnalysisUiState {
     object Loading : AnalysisUiState
     data class Success(val report: AnalysisReport) : AnalysisUiState
     data class Error(val message: String) : AnalysisUiState
+}
+
+sealed interface ProbabilityUiState {
+    object Idle : ProbabilityUiState
+    object Loading : ProbabilityUiState
+    data class Success(val result: MatchProbabilityAnalysis) : ProbabilityUiState
+    data class Error(val message: String) : ProbabilityUiState
 }
 
 // Model to represent a composite multiple/accumulator recommendation
@@ -54,6 +62,9 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _analysisState = MutableStateFlow<AnalysisUiState>(AnalysisUiState.Idle)
     val analysisState: StateFlow<AnalysisUiState> = _analysisState.asStateFlow()
+
+    private val _probabilityState = MutableStateFlow<ProbabilityUiState>(ProbabilityUiState.Idle)
+    val probabilityState: StateFlow<ProbabilityUiState> = _probabilityState.asStateFlow()
 
     private val _selectedMatch = MutableStateFlow<AnalyzedMatch?>(null)
     val selectedMatch: StateFlow<AnalyzedMatch?> = _selectedMatch.asStateFlow()
@@ -145,6 +156,39 @@ class MatchViewModel(application: Application) : AndroidViewModel(application) {
 
     fun resetAnalysisState() {
         _analysisState.value = AnalysisUiState.Idle
+    }
+
+    fun runProbabilityAnalysis(
+        homeTeam: String,
+        awayTeam: String,
+        league: String,
+        homeOdd: Double,
+        drawOdd: Double,
+        awayOdd: Double,
+        additionalContext: String? = null
+    ) {
+        viewModelScope.launch {
+            _probabilityState.value = ProbabilityUiState.Loading
+            try {
+                val result = repository.getProbabilityAnalysis(
+                    homeTeam = homeTeam,
+                    awayTeam = awayTeam,
+                    league = league,
+                    homeOdd = homeOdd,
+                    drawOdd = drawOdd,
+                    awayOdd = awayOdd,
+                    additionalContext = additionalContext
+                )
+                _probabilityState.value = ProbabilityUiState.Success(result)
+            } catch (e: Exception) {
+                Log.e("MatchViewModel", "Probability analysis failed", e)
+                _probabilityState.value = ProbabilityUiState.Error(e.message ?: "Erro desconhecido ao calcular probabilidades.")
+            }
+        }
+    }
+
+    fun resetProbabilityState() {
+        _probabilityState.value = ProbabilityUiState.Idle
     }
 
     /**

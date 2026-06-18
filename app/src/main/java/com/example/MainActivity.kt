@@ -434,6 +434,20 @@ fun MatchDetailView(
         RecommendedBetCard(bet = report.recommendedSingleBet, score = report.confidenceScore)
 
         Spacer(modifier = Modifier.height(14.dp))
+
+        // Clean interactive Recharts-style Probability Dashboard UI
+        ProbabilityDashboardRecharts(
+            homeTeam = match.homeTeam,
+            awayTeam = match.awayTeam,
+            homeOdd = match.homeOdd,
+            drawOdd = match.drawOdd,
+            awayOdd = match.awayOdd,
+            probHome = report.layer3.probWinHome,
+            probDraw = report.layer3.probDraw,
+            probAway = report.layer3.probWinAway
+        )
+
+        Spacer(modifier = Modifier.height(14.dp))
         Text(
             text = "DEPARTAMENTO DE RISCO - 5 CAMADAS DE ANÁLISE",
             color = CyberTeal,

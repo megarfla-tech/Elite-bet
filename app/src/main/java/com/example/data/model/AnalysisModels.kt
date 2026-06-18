@@ -75,3 +75,11 @@ data class Layer5Data(
     val expectedValue: Double, // EV
     val isEvPositive: Boolean
 )
+
+@JsonClass(generateAdapter = true)
+data class MatchProbabilityAnalysis(
+    val probHome: Double,
+    val probDraw: Double,
+    val probAway: Double,
+    val justification: String
+)
