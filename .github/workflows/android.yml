@@ -28,14 +28,11 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v3
-
-      - name: Grant Execute Permission and Fix Line Endings
-        run: |
-          sed -i 's/\r$//' gradlew
-          chmod +x gradlew
+        with:
+          gradle-version: '9.3.1'
 
       - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug -x test --no-daemon
+        run: gradle :app:assembleDebug -x test --no-daemon
 
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
