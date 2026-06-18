@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up JDK 17
@@ -20,27 +20,44 @@ jobs:
           distribution: 'temurin'
           java-version: '17'
 
-      # Importante: define os caminhos do SDK que já vêm no GitHub
-      - name: Set Android SDK path
+      # O GitHub Actions já tem o Android SDK instalado, mas garantimos as variáveis
+      - name: Set Android SDK environment
         run: |
           echo "ANDROID_HOME=$ANDROID_HOME" >> $GITHUB_ENV
           echo "ANDROID_SDK_ROOT=$ANDROID_HOME" >> $GITHUB_ENV
 
-      - name: Create .env (se existir)
+      # Cria .env com segurança (se não existir .env.example, cria vazio)
+      - name: Create .env file
         run: |
-          if [ -f .env.example ]; then cp .env.example .env; else touch .env; fi
+          if [ -f .env.example ]; then
+            cp .env.example .env
+          else
+            touch .env
+          fi
 
+      # Dá permissão de execução ao gradlew
       - name: Make gradlew executable
         run: chmod +x gradlew
 
-      - name: Build Debug APK
-        run: ./gradlew :app:assembleDebug -x test --no-daemon
+      # (OPCIONAL) Valida o wrapper do Gradle – ajuda a evitar erros de download
+      - name: Validate Gradle wrapper
+        uses: gradle/wrapper-validation-action@v2
 
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: PronoElite-Debug-APK
-          path: app/build/outputs/apk/debug/*.apk
+      # 🔍 DIAGNÓSTICO: lista os arquivos do projeto para ver se está tudo no lugar
+      - name: List project files (debug)
+        run: |
+          echo "=== Estrutura do projeto ==="
+          ls -la
+          echo "=== Conteúdo da pasta app (se existir) ==="
+          ls -la app/ || echo "Pasta app não encontrada"
+          echo "=== Versão do Gradle ==="
+          ./gradlew --version || echo "Gradle wrapper não executável"
+
+      # Build do APK de depuração (com stacktrace para ver erro detalhado)
+      - name: Build Debug APK
+        run: ./gradlew :app:assembleDebug -x test --no-daemon --stacktrace
+
+      # Upload do APK se der certo
       - name: Upload Debug APK
         uses: actions/upload-artifact@v4
         with:
